@@ -66,4 +66,8 @@ public class ExamController {
         return "redirect:/list";
     }
 
+    @GetMapping("/security")
+    public String testSecurity() {
+        return "security-test";
+    }
 }
