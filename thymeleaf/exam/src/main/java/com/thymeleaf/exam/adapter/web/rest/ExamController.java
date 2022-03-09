@@ -4,9 +4,12 @@ package com.thymeleaf.exam.adapter.web.rest;
 import com.thymeleaf.exam.adapter.service.ExamService;
 import com.thymeleaf.exam.model.Exam;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -38,7 +41,13 @@ public class ExamController {
     }
 
     @PostMapping("/saveExam")
-    public String saveEmployee(@ModelAttribute Exam exam) {
+    public String saveEmployee(@ModelAttribute @Valid Exam exam , BindingResult bindingResult , Model model) {
+
+        boolean hasErrors = bindingResult.hasErrors();
+        if (hasErrors){
+            model.addAttribute("exam", exam);
+            return "add-exam-form";
+        }
         examService.save(exam);
         return "redirect:/list";
     }

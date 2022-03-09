@@ -7,6 +7,12 @@
 			href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
 			integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" 
 			crossorigin="anonymous" />
+		<style>
+			.error{
+				color: red;
+			}
+
+		</style>
 	</head>
 	<body>
 		
@@ -18,7 +24,8 @@
 			<form th:action="@{/saveExam}" th:object="${exam}" method="POST">
 				
 				<input type="text" th:field="*{name}" class="form-control col-4 mb-4" placeholder="Enter Name" />
-				
+				<p th:if="${#fields.hasErrors('name')}" th:errorclass="error"
+				 th:errors="*{name}"/>
 				<input type="text" th:field="*{passingScore}" class="form-control col-4 mb-4" placeholder="Enter passing score" />
 
 				<input type="text" th:field="*{fullScore}" class="form-control col-4 mb-4" placeholder="Enter full score" />
