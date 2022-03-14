@@ -27,14 +27,14 @@ public class RestExamController {
         return exams;
     }
 
-    @GetMapping("/examId")
-    public Exam saveExam(@PathVariable long examId) throws Exception {
+    @GetMapping("/{examId}")
+    public Exam getExam(@PathVariable long examId) throws Exception {
 
         return examService.findById(examId);
     }
 
 
-    @PutMapping("/examId")
+    @PutMapping("/{examId}")
     public void updateExam(@PathVariable long examId,Exam exam) throws Exception {
         Exam originalExam = examService.findById(examId);
 
@@ -44,6 +44,10 @@ public class RestExamController {
 
         examService.save(originalExam);
     }
+    @DeleteMapping("/{examId}")
+    public void deleteExam(@PathVariable long examId) throws Exception {
 
+         examService.deleteById(examId);
+    }
 
 }

@@ -16,6 +16,19 @@ class ListExamComponent extends Component {
             });
     }
 
+    viewExam(id){
+        this.props.history.push(`/view-exam/${id}`);
+    }
+    editExam(id){
+        this.props.history.push(`/add-exam/${id}`);
+    }
+    deleteExam(id){
+        ExamService.deleteExam(id).then(
+            this.setState({exams: this.state.exams.filter(exam => exam.id !== id)})
+        );
+    
+    }
+
     render() {
         return (
             <div>
@@ -41,7 +54,12 @@ class ListExamComponent extends Component {
                                              <td> {exam.name} </td>   
                                              <td> {exam.passingScore}</td>
                                              <td> {exam.fullScore}</td>
-                                             <td> {exam.id}</td>
+                                             <td>
+                                                 <button onClick={ () => this.editExam(exam.id)} className="btn btn-info">Update</button>
+                                                 <button style={{marginLeft: "10px"}} onClick={ () => this.viewExam(exam.id)} className="btn btn-info">View</button>
+                                                 <button style={{marginLeft: "10px"}} onClick={ () => this.deleteExam(exam.id)} className="btn btn-danger">Delete</button>
+
+                                             </td>
                                         </tr>
                                     )
                                 }
