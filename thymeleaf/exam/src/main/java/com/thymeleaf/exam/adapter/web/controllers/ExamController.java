@@ -1,4 +1,4 @@
-package com.thymeleaf.exam.adapter.web.rest;
+package com.thymeleaf.exam.adapter.web.controllers;
 
 
 import com.thymeleaf.exam.adapter.service.ExamService;
