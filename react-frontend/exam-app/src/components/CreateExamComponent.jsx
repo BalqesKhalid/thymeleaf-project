@@ -14,7 +14,9 @@ class CreateExamComponent extends Component {
         this.changeNameHandler = this.changeNameHandler.bind(this);
         this.changePassingScoreHandler = this.changePassingScoreHandler.bind(this);
         this.changeFullScoreHandler = this.changeFullScoreHandler.bind(this);
-        this.saveExam = this.saveExam.bind(this);
+        this.saveOrUpdateEmployee = this.saveOrUpdateEmployee.bind(this);
+
+        //this.saveExam = this.saveExam.bind(this);
     }
 
     componentDidMount(){
@@ -34,16 +36,6 @@ class CreateExamComponent extends Component {
         }   
     }
 
-    saveExam = (e) => {
-        e.preventDefault();
-        let exam = {name: this.state.name, passingScore: this.state.passingScore, fullScore: this.state.fullScore};
-        console.log('exam => ' + JSON.stringify(exam));
-        console.log('id => ' + JSON.stringify(this.state.id));
-        ExamService.saveExam(exam, this.state.id).then( res => {
-            this.props.history.push('/exams');
-        });
-    }
-
     saveOrUpdateEmployee = (e) => {
         e.preventDefault();
         let exam = {name: this.state.name, passingScore: this.state.passingScore, fullScore: this.state.fullScore};
@@ -51,11 +43,11 @@ class CreateExamComponent extends Component {
 
         // step 5
         if(this.state.id === '_add'){
-            ExamService.creatExam(exam).then( res => {
+            ExamService.saveExam(exam).then( res => {
                 this.props.history.push('/exams');
             });
         }else{
-            ExamService.saveExam(exam, this.state.id).then( res => {
+            ExamService.updateExam(exam, this.state.id).then( res => {
                 this.props.history.push('/exams');
             });
         }
@@ -103,7 +95,7 @@ class CreateExamComponent extends Component {
                                                 value={this.state.fullScore} onChange={this.changeFullScoreHandler}/>
                                         </div>
 
-                                        <button className="btn btn-success" onClick={this.saveExam}>Save</button>
+                                        <button className="btn btn-success" onClick={this.saveOrUpdateEmployee}>Save</button>
                                         <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>Cancel</button>
                                     </form>
                                 </div>

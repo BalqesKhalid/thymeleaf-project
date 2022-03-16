@@ -6,11 +6,11 @@ class ExamService {
 
     getExams(){
         return axios.get(EXAM_API_BASE_URL);
-    }
+    } 
 
-    createExam(exam){
-        return axios.post(EXAM_API_BASE_URL, exam);
-    }
+    saveExam(exam){
+        return axios.post(EXAM_API_BASE_URL,exam);
+    } 
 
     getExamById(examId){
         return axios.get(EXAM_API_BASE_URL+"/"+examId);
@@ -30,4 +30,4 @@ class ExamService {
     }
 }
 
-export default new ExamService()
+export default new ExamService();

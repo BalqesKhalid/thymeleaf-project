@@ -9,6 +9,10 @@ class ListExamComponent extends Component {
         this.state = {
                 exams: []
         }
+        this.viewExam = this.viewExam.bind(this);
+        this.addExam = this.addExam.bind(this);
+        this.editExam = this.editExam.bind(this);
+        this.deleteExam = this.deleteExam.bind(this);
     }
     componentDidMount(){
         ExamService.getExams().then((res) => {
@@ -28,12 +32,18 @@ class ListExamComponent extends Component {
         );
     
     }
+    addExam(){
+        this.props.history.push('/add-exam/_add');
+    }
 
     render() {
         return (
             <div>
                  <h2 className="text-center">Exams List</h2>
-
+                
+                 <div className = "row" >
+                    <button className="btn btn-primary" onClick={this.addExam} style={{width: "30%"}}> Add Exam</button>
+                 </div>
                  <br></br>
                  <div className = "row">
                         <table className = "table table-striped table-bordered">

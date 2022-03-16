@@ -41,7 +41,7 @@ public class ExamController {
     }
 
     @PostMapping("/saveExam")
-    public String saveEmployee(@ModelAttribute @Valid Exam exam , BindingResult bindingResult , Model model) {
+    public String saveExam(@ModelAttribute @Valid Exam exam , BindingResult bindingResult , Model model) {
 
         boolean hasErrors = bindingResult.hasErrors();
         if (hasErrors){
